@@ -93,6 +93,14 @@ describe("SchusterFWEB3Faucet", function () {
                 .to.be.revertedWith("Cannot renounce ownership");
         })
 
+        it("Allows for a transfer of Ownership and appropriate response to owner calls", async function () {
+            await faucet.connect(owner).setDripAmount(1, 17);
+            await faucet.connect(owner).transferOwnership(addr3.address);
+            await expect(faucet.connect(owner).setDripAmount(1, 17))
+                .to.be.revertedWith("Ownable: caller is not the owner");
+            await faucet.connect(addr3).setDripAmount(1, 17);
+        })
+
         it("Sends Tokens to new users who utilize the faucet", async function () {
             const addr1PreFaucetBalance = await schusterToken.connect(addr1).balanceOf(addr1.address);
 
