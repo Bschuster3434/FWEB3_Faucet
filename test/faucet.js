@@ -88,6 +88,11 @@ describe("SchusterFWEB3Faucet", function () {
     })
 
     describe("Faucet", function () {
+        it("Does not allow the owner to renounce ownership", async function () {
+            await expect(faucet.renounceOwnership())
+                .to.be.revertedWith("Cannot renounce ownership");
+        })
+
         it("Sends Tokens to new users who utilize the faucet", async function () {
             const addr1PreFaucetBalance = await schusterToken.connect(addr1).balanceOf(addr1.address);
 

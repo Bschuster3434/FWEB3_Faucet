@@ -1,9 +1,8 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.0 <=0.9.0;
+pragma solidity 0.8.4;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-
 
 contract SchusterFWEB3Faucet is Ownable {
 
@@ -18,6 +17,10 @@ contract SchusterFWEB3Faucet is Ownable {
     event FaucetUsed(address indexed _user, address indexed _runner);
     event BulkExclusion(address [] _users);
     event DripAmountSet(uint _dripAmount);
+
+    function renounceOwnership() public override onlyOwner {
+        revert("Cannot renounce ownership"); //not possible with this smart contract
+    }
 
     constructor (IERC20 _token, uint _faucetDripBase, uint _faucetDripDecimal) {
         token = _token;
