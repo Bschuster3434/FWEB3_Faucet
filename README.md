@@ -16,3 +16,4 @@ This faucet can only be run by verified contracts to avoid abuse. This 'runner' 
 - remove_runner(address _runner): Removes the runner from the contract.
 - change_drip_amount(uint _amount): Defines how much FWEB3 to be despensed from the account. Can only be executed by the owner.
 - bulk_exclude_users(array [] _users): Excludes users from using the faucet. Can only be executed by the owner.
+- hasUsedFaucet(address _user): Returns a bool if the user has used the faucet in the past.
