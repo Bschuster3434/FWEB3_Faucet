@@ -75,6 +75,16 @@ describe("SchusterFWEB3Faucet", function () {
             await expect(faucet.connect(runner1).verifyRunner(addr3.address))
                 .to.be.revertedWith("Ownable: caller is not the owner");                     
         })
+
+        it("Allows anyone to check if an address is verified", async function () {
+            expect(await faucet.checkVerified(runner1.address)).to.equal(true);
+            await faucet.removeRunner(runner1.address);
+            expect(await faucet.checkVerified(runner1.address)).to.equal(false);
+            expect(await faucet.checkVerified(addr1.address)).to.equal(false);
+            await faucet.verifyRunner(addr1.address);
+            expect(await faucet.checkVerified(addr1.address)).to.equal(true);
+
+        })
     })
 
     describe("Faucet", function () {

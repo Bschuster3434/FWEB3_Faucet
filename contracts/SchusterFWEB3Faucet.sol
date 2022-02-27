@@ -51,6 +51,10 @@ contract SchusterFWEB3Faucet is Ownable {
         emit RunnerRemoved(_runner);        
     }
 
+    function checkVerified(address _runner) view external returns (bool) {
+        return verifiedRunner[_runner];
+    }
+
     function hasUsedFaucet(address _user) view external returns (bool) {
         return excludedAddress[_user];
     }
